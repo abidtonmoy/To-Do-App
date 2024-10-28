@@ -1,4 +1,7 @@
 let tasks = [];
+const saveTasks = () => {
+  localStorage.setItem("tasks", JSON.stringify(tasks));
+};
 
 // Add a new task to the list
 const addTask = () => {
@@ -10,6 +13,7 @@ const addTask = () => {
     updateTaskList();
     taskInput.value = ""; // Clear input after adding a task
     updateStats(); // Update progress stats after adding a task
+    saveTasks();
   }
 };
 
@@ -18,6 +22,7 @@ const toggleTaskComplete = (index) => {
   tasks[index].completed = !tasks[index].completed;
   updateTaskList();
   updateStats(); // Update progress stats after toggling a task
+  saveTasks();
 };
 
 // Delete a task from the list
@@ -25,6 +30,7 @@ const deleteTask = (index) => {
   tasks.splice(index, 1);
   updateTaskList();
   updateStats(); // Update progress stats after deleting a task
+  saveTasks();
 };
 
 // Edit a task's text
@@ -34,6 +40,7 @@ const editTask = (index) => {
   tasks.splice(index, 1); // Remove the task being edited
   updateTaskList();
   updateStats();
+  saveTasks();
 };
 
 // Update the task list in the UI
