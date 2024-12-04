@@ -18,6 +18,16 @@ const addTask = () => {
   }
 };
 
+// Load tasks from localStorage on page load
+window.addEventListener("DOMContentLoaded", () => {
+  const storedTasks = JSON.parse(localStorage.getItem("tasks"));
+  if (storedTasks) {
+    tasks = storedTasks;
+    updateTaskList();
+    updateStats();
+  }
+});
+
 // Toggle task completion status
 const toggleTaskComplete = (index) => {
   tasks[index].completed = !tasks[index].completed;
